@@ -45,22 +45,19 @@ const DreamJob = () => {
                             <Avatar>+9K</Avatar>
                         </AvatarGroup>
                     </div>
-                    <div>
-                        <div>
-                            <div className="w-12 h-12 p-1">
+                    <div className="absolute -left-10 w-fit top-[28%] border-tulip-tree-400 border rounded-lg p-2 backdrop-blur-md gap-3 flex flex-col">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-10 h-10 p-1 bg-cyan-900 rounded-lg">
                                 <img src="google.png"/>
                             </div>
-                            <div>
-                                <div></div>
-                                <div></div>
+                            <div className="text-sm text-cyan-100">
+                                <div>Software Engineer</div>
+                                <div className="text-cyan-200 text-xs">New York</div>
                             </div>
                         </div>
-                        <div>
-                            <span>
-                            </span>
-                            <span>
-
-                            </span>
+                        <div className="fle gap-2 justify-around text-cyan-200 text-xs">
+                            <span>1 day ago</span>
+                            <span>120 Applicants</span>
                         </div>
                     </div>
                 </div>
