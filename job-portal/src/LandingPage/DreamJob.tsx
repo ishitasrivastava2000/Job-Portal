@@ -5,7 +5,7 @@ const DreamJob = () => {
     return (
         <div className="flex items-center px-16"
         style={{
-            backgroundImage: "url('job-search-img.jpeg')",
+            backgroundImage: "url('job-search-img.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

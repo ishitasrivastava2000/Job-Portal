@@ -32,7 +32,7 @@ const JobCategory = () => {
             jobCategory.map((category, index) => <Carousel.Slide>
                 <div className=" flex flex-col items-center w-64 gap-2 border border-tulip-tree-300 p-5 rounded-xl hover:cursor-pointer hover:shadow-[0_0_5px_2px_black] my-5 transition duration-300 ease-in-out !shadow-tulip-tree-300">
                 <div className="p-2 bg-tulip-tree-300 rounded-full">
-                        <img className="h-8 w-8" src={`../Category/${category.name}.png`} alt={category.name}/>
+                        <img className="h-8 w-8" src={`../Categories/${category.name}.png`} alt={category.name}/>
                     </div>
                     <div className="text-cyan-100 text-xl font-semibold">{category.name}</div>
                     <div className="text-sm text-center text-cyan-300">{category.desc}</div>
