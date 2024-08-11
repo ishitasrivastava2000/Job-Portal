@@ -8,7 +8,7 @@ const footerLinks = [
 
 const Footer = () =>
 {
-    return <div className="mt-20  pb-5 flex gap-5 justify-around">
+    return <div className="pt-20  pb-5 flex gap-5 justify-around bg-cyan-950 font-['poppins']">
         <div className="w-1/4 flex flex-col gap-4">
             <div className="flex gap-1 items-center text-tulip-tree-400">
                 <IconCompass className="h-6 w-6" stroke={2.3}/>

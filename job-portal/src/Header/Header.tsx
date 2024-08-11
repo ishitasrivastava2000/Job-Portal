@@ -6,7 +6,7 @@ import NavLinks from "./NavLinks";
 
 const Header = () => {
     return <div className="w-full bg-cyan-950 px-6 text-white h-20 flex justify-between
-            items-center">
+            items-center font-['poppins']">
         <div className="flex gap-1 items-center text-tulip-tree-400">
             <IconCompass className="h-10 w-8" stroke={2.3}/>
             <div className="text-3xl font-semibold">JobCompass</div>

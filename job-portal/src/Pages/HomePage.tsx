@@ -10,14 +10,12 @@ import Footer from "../Footer/Footer"
 const HomePage = () => {
     return (
         <div className="min-h-[100vh] bg-cyan-950 font-['poppins']">
-            <Header/>
             <DreamJob/>
             <Companies/>
             <JobCategory/>
             <Working/>
             <Testimonials/>
             <Subscribe/>
-            <Footer/>
         </div>
     )
 }
