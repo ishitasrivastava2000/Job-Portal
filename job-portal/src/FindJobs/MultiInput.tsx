@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import { CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { Checkbox, CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 
 const groceries = ['Apples', 'Bananas', 'Broccoli', 'Carrpts', 'Chocolate']
 
@@ -31,18 +32,23 @@ const MultiInput = () => {
     const handleValueRemove = (val: string) =>
         setValue((current) => current.filter((v) => v !== val));
 
-    const values = value.map((item) => (
+    const values = value.slice(0,1).map((item) => (
         <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
             {item}
         </Pill>
     ));
-
+    
     const options = data
-        .filter((item) => item.toLowerCase().includes(search.trim().toLowerCase()))
         .map((item) => (
             <Combobox.Option value={item} key={item} active={value.includes(item)}>
                 <Group gap="sm">
-                    {value.includes(item) ? <CheckIcon size={12} /> : null}
+                    <Checkbox size='xs' color='tulip-tree.4'
+                        checked={value.includes(item)}
+                        onChange={()=>{}}
+                        aria-hidden
+                        tabIndex={-1}
+                        style={{pointerEvents: 'none'}}
+                    />
                     <span>{item}</span>
                 </Group>
             </Combobox.Option>
@@ -51,33 +57,24 @@ const MultiInput = () => {
     return (
         <Combobox store={combobox} onOptionSubmit={handleValueSelect} withinPortal={false}>
             <Combobox.DropdownTarget>
-                <PillsInput onClick={() => combobox.openDropdown()}>
+                <PillsInput variant='unstyled' 
+                rightSection={<Combobox.Chevron/>} 
+                onClick={() => combobox.openDropdown()}
+                leftSection={
+                    <div className='text-tulip-tree-400 p-1 bg-cyan-900 rounded-full mr-1'><IconSearch/></div>
+                }>
                     <Pill.Group>
-                        {value}
-
-                        <Combobox.EventsTarget>
-                            <PillsInput.Field
-                                onFocus={() => combobox.openDropdown()}
-                                onBlur={() => combobox.openDropdown()}
-                                value={search}
-                                placeholder="Search values"
-                                onChange={(event) => {
-                                    combobox.updateSelectedOptionIndex();
-                                    setSearch(event.currentTarget.value);
-                                }}
-                                onKeyDown={(event) => {
-                                    if (event.key === 'Backspace' && search.length === 0) {
-                                        event.preventDefault();
-                                        handleValueRemove(value[value.length - 1]);
-                                    }
-                                }}
-                            />
-                        </Combobox.EventsTarget>
+                        {values}
                     </Pill.Group>
                 </PillsInput>
             </Combobox.DropdownTarget>
             
             <Combobox.Dropdown>
+                <Combobox.Search 
+                    value={search}
+                    onChange={(event) => setSearch(event.currentTarget.value)}
+                    placeholder='Search groceries'
+                />
                 <Combobox.Options>
                     {options}
 
