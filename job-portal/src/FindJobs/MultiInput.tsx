@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { Checkbox, CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
+import { Input, Checkbox, CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 
 const groceries = ['Apples', 'Bananas', 'Broccoli', 'Carrpts', 'Chocolate']
@@ -64,7 +64,29 @@ const MultiInput = () => {
                     <div className='text-tulip-tree-400 p-1 bg-cyan-900 rounded-full mr-1'><IconSearch/></div>
                 }>
                     <Pill.Group>
-                        {values}
+                        {value.length > 0 ? (
+                            <>
+                                {values}
+                                {value.length > 1 && (
+                                    <Pill>+{value.length - 1} more</Pill>
+                                )}
+                            </>
+                        ) : (
+                            <Input.Placeholder>Pick one or more values</Input.Placeholder>
+                        )}
+
+                        <Combobox.EventsTarget>
+                            <PillsInput.Field
+                                type="hidden"
+                                onBlur={() => combobox.closeDropdown()}
+                                onKeyDown={(event) => {
+                                    if(event.key === 'Backspace') {
+                                        event.preventDefault();
+                                        handleValueRemove(value[value.length -1]);
+                                    }
+                                }}
+                            />
+                        </Combobox.EventsTarget>                       
                     </Pill.Group>
                 </PillsInput>
             </Combobox.DropdownTarget>
