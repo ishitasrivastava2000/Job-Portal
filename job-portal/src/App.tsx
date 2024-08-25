@@ -15,7 +15,8 @@ function App() {
       ['#fdfae9','#faf3c7','#f7e691','#f2d052','#ebb619','#dca216','#be7d10','#985910','#7e4815','#6b3b18','#3e1d0a'],
       'cyan': 
       ['#ecfeff', '#cffafe', '#a5f3fc','#67e8f9','#22d3ee','#06b6d4','#0891b2','#0e7490','#155e75','#164e63','#083344']
-    }
+    },
+    fontFamily:"poppins, sans-serif"
   })
 
   return (

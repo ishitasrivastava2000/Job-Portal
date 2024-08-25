@@ -1,17 +1,18 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { Input, Checkbox, CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconSelector } from '@tabler/icons-react';
 
-const groceries = ['Apples', 'Bananas', 'Broccoli', 'Carrpts', 'Chocolate']
-
-const MultiInput = () => {
+const MultiInput = (props:any) => {
+    useEffect(()=> {
+        setData(props.options);
+    }, [])
     const combobox = useCombobox({
         onDropdownClose: () => combobox.resetSelectedOption(),
         onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
     });
 
     const [search, setSearch] = useState('');
-    const [data, setData] = useState(groceries);
+    const [data, setData] = useState<string[]>([]);
     const [value, setValue] = useState<string[]>([]);
 
     const exactOptionMatch = data.some((item)=> item === search);
@@ -38,7 +39,7 @@ const MultiInput = () => {
         </Pill>
     ));
     
-    const options = data
+    const options = data.filter((item) => item.toLowerCase().includes(search.trim().toLowerCase()))
         .map((item) => (
             <Combobox.Option value={item} key={item} active={value.includes(item)}>
                 <Group gap="sm">
@@ -49,7 +50,7 @@ const MultiInput = () => {
                         tabIndex={-1}
                         style={{pointerEvents: 'none'}}
                     />
-                    <span>{item}</span>
+                    <span className='text-cyan-300'>{item}</span>
                 </Group>
             </Combobox.Option>
         ));
@@ -58,10 +59,10 @@ const MultiInput = () => {
         <Combobox store={combobox} onOptionSubmit={handleValueSelect} withinPortal={false}>
             <Combobox.DropdownTarget>
                 <PillsInput variant='unstyled' 
-                rightSection={<Combobox.Chevron/>} 
-                onClick={() => combobox.openDropdown()}
+                rightSection={<IconSelector/>} 
+                onClick={() => combobox.toggleDropdown()}
                 leftSection={
-                    <div className='text-tulip-tree-400 p-1 bg-cyan-900 rounded-full mr-1'><IconSearch/></div>
+                    <div className='text-tulip-tree-400 p-1 bg-cyan-900 rounded-full mr-2'><props.icon/></div>
                 }>
                     <Pill.Group>
                         {value.length > 0 ? (
@@ -72,21 +73,8 @@ const MultiInput = () => {
                                 )}
                             </>
                         ) : (
-                            <Input.Placeholder>Pick one or more values</Input.Placeholder>
-                        )}
-
-                        <Combobox.EventsTarget>
-                            <PillsInput.Field
-                                type="hidden"
-                                onBlur={() => combobox.closeDropdown()}
-                                onKeyDown={(event) => {
-                                    if(event.key === 'Backspace') {
-                                        event.preventDefault();
-                                        handleValueRemove(value[value.length -1]);
-                                    }
-                                }}
-                            />
-                        </Combobox.EventsTarget>                       
+                            <Input.Placeholder className='!text-cyan-300'>{props.title}</Input.Placeholder>
+                        )}              
                     </Pill.Group>
                 </PillsInput>
             </Combobox.DropdownTarget>
